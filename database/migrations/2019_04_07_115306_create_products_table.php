@@ -28,6 +28,7 @@ class CreateProductsTable extends Migration
             $table->string('product_name');
             $table->string('product_description')->nullable();
             $table->string('product_images')->nullable();
+            $table->integer('status')->default('1');
             $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

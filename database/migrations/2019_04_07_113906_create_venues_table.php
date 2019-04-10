@@ -17,14 +17,13 @@ class CreateVenuesTable extends Migration
             $table->increments('id');
             $table->integer('system_id')->unsigned();
             $table->foreign('system_id')->references('id')->on('system_type');
-            $table->integer('venue_id')->unsigned();
             $table->integer('merchant_id')->unsigned();
             $table->foreign('merchant_id')->references('id')->on('merchants');
             $table->string('venue_name');
             $table->string('venue_images');
             $table->decimal('venue_longitude', 14,10)->nullable();
             $table->decimal('venue_latitude',14,10)->nullable();
-            $table->string('venue_category_ids')->nullable();
+            $table->integer('status')->default('1');
             $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

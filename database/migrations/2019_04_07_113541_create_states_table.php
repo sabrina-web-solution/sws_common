@@ -18,6 +18,7 @@ class CreateStatesTable extends Migration
             $table->string('state_name');
             $table->integer('country_id')->unsigned();
             $table->foreign('country_id')->references('id')->on('countries');
+            $table->integer('status')->default('1');
             $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

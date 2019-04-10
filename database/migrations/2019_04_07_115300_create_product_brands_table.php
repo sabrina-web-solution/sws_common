@@ -19,6 +19,7 @@ class CreateProductBrandsTable extends Migration
             $table->foreign('system_id')->references('id')->on('system_type');
             $table->string('brand_name');
             $table->string('brand_images');
+            $table->integer('status')->default('1');
             $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

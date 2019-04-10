@@ -26,6 +26,7 @@ class CreateProfilesTable extends Migration
             $table->smallInteger('mobile')->nullable();
             $table->enum('marital_status',['single','married','widowed'])->nullable();
             $table->string('images')->nullable();
+            $table->integer('status')->default('1');
             $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

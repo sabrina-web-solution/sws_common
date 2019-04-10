@@ -29,6 +29,9 @@ class CreateProductOffersTable extends Migration
             $table->foreign('modifier_id')->references('id')->on('product_modifiers');
             $table->decimal('discount_amt',8,2);
             $table->text('combo_product_ids')->nullable();
+            $table->string('valid_from')->nullable();
+            $table->string('valid_to')->nullable();
+            $table->integer('status')->default('1');
             $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

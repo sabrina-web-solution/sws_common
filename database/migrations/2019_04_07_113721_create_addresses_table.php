@@ -34,6 +34,7 @@ class CreateAddressesTable extends Migration
             $table->decimal('user_latitude', 14, 10)->nullable();
             $table->enum('type',['primary','none']);
             $table->string('update_token')->nullable();
+            $table->integer('status')->default('1');
             $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

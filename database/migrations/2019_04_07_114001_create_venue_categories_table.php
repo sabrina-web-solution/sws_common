@@ -23,6 +23,9 @@ class CreateVenueCategoriesTable extends Migration
             $table->foreign('merchant_id')->references('id')->on('merchants');
             $table->integer('venue_id')->unsigned();
             $table->foreign('venue_id')->references('id')->on('venues');
+            $table->integer('cat_id')->unsigned();
+            $table->foreign('cat_id')->references('id')->on('categories');
+            $table->integer('status')->default('1');
             $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
