@@ -14,16 +14,16 @@ class CreateVenueCategoriesTable extends Migration
     public function up()
     {
         Schema::create('venue_categories', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('system_id')->unsigned();
+            $table->bigIncrements('id');
+            $table->bigInteger('system_id')->unsigned();
             $table->foreign('system_id')->references('id')->on('system_type');
             $table->string('venue_category_name');
             $table->string('venue_category_images');
-            $table->integer('merchant_id')->unsigned();
+            $table->bigInteger('merchant_id')->unsigned();
             $table->foreign('merchant_id')->references('id')->on('merchants');
-            $table->integer('venue_id')->unsigned();
+            $table->bigInteger('venue_id')->unsigned();
             $table->foreign('venue_id')->references('id')->on('venues');
-            $table->integer('cat_id')->unsigned();
+            $table->bigInteger('cat_id')->unsigned();
             $table->foreign('cat_id')->references('id')->on('categories');
             $table->integer('status')->default('1');
             $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

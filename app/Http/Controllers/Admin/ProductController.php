@@ -83,7 +83,7 @@ class ProductController extends Controller
             }
             $cat_ids = unique($cat_ids);
 
-            $data['category'] = Category:::where('system_id',$data1->system_id)->whereIn('id',$cat_ids)->get();
+            $data['category'] = Category::where('system_id',$data1->system_id)->whereIn('id',$cat_ids)->get();
 
         }
         return response()->json(['status'=>200,'data'=>$data]);
@@ -151,7 +151,7 @@ class ProductController extends Controller
             }
             $cat_ids = unique($cat_ids);
 
-            $data['category'] = Category:::where('system_id',$data1->system_id)->whereIn('id',$cat_ids)->get();
+            $data['category'] = Category::where('system_id',$data1->system_id)->whereIn('id',$cat_ids)->get();
 
         }
         return response()->json(['status'=>200,'data'=>$data]);

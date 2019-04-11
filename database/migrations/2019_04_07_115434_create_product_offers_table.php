@@ -14,18 +14,18 @@ class CreateProductOffersTable extends Migration
     public function up()
     {
         Schema::create('product_offers', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('system_id')->unsigned();
+            $table->bigIncrements('id');
+            $table->bigInteger('system_id')->unsigned();
             $table->foreign('system_id')->references('id')->on('system_type');
             $table->string('offer_name',255);
             $table->enum('offer_type',['amt','per','combo'])->default('amt');
-            $table->integer('product_id')->unsigned();
+            $table->bigInteger('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products');
-            $table->integer('venue_id')->unsigned();
+            $table->bigInteger('venue_id')->unsigned();
             $table->foreign('venue_id')->references('id')->on('venues');
-            $table->integer('merchant_id')->unsigned();
+            $table->bigInteger('merchant_id')->unsigned();
             $table->foreign('merchant_id')->references('id')->on('merchants');
-            $table->integer('modifier_id')->unsigned();
+            $table->bigInteger('modifier_id')->unsigned();
             $table->foreign('modifier_id')->references('id')->on('product_modifiers');
             $table->decimal('discount_amt',8,2);
             $table->text('combo_product_ids')->nullable();

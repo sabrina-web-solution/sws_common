@@ -19,35 +19,46 @@ class OrderController extends Controller
 {
     public function newOrder(Request $request){
     	try {
+    			$today 	= strtotime(date('dS M, Y H:i A'));
     		  	$c_data = json_decode($request->data);
-    		  	foreach ($c_data as $key => $data) {
-    		  		$products 	= 	Product::where('id',$data->product_id)
-    		  								->where('venue_id',$data->venue_id)
-    		  								->where('merchant_id',$data->merchant_id)
-    		  								->where('modifier_id',$data->modifier_id)
-    		  								->first();
+    		  	$data['received'] 	= 	$c_data;
+    		  	$order 	= 	$orderdetails 	= 	$productdetails		= 	[];
+    		  	
+    		  	foreach ($c_data['product_details'] as $key => $data) {
+    		  		$products 	= 	Product::find($data->product_id);
     		  		if($products){
-    		  			if($data->offer_id){ 
-    		  					$offer 	= 	ProductOffer::where('id',$data->offer_id)->first();
-    		  			} else {
-    		  				$date 		= Date('Y-m-d H:m');
-    		  				$offer 		= ProductOffer::where('product_id',$data->product_id)
-    		  											->where('venue_id',$data->venue_id)
-    		  											->where('merchant_id',$data->merchant_id)
-    		  											->whereRaw("Find_in_set('days',)")
-    		  											->first();
-
+    		  			$perpcprice 	= 	$products->sell_price;
+    		  			if($data->modifier_id) {
+							$modifier 		= ProductModifier::find($data->modifier_id);
+							if($modifier){
+								$perpcprice = $modifier->sell_price;	
+							}
+						}
+	  					$offer 	= 	ProductOffer::where('product_id',$data->product_id)->where('venue_id',$data->)->where('start','<=',$today)->where('end','>=',$today)->first();
+	  					if($offer){
+	  						if($offer->type == 'per'){
+	  							$perpcprice		*=	(100-$offer->peramt)/100;
+	  						} elseif($offer->type == 'amt'){
+	  							$perpcprice		-=	$offer->peramt;
+	  						} elseif ($offer->type == 'comboper') {
+	  							
+	  						}
     		  			}
-						if($offer){
-							$perpcprice 	= 	$offer->costperpc; 
-						} else {
-							$modifier 		= ProductModifier::where('id',$data->modifier_id)->first();
-						}	    		  								
+    		  			$tax 	= 	Tax::find($products->taxid);
+    		  			if($tax){
+    		  				$taxamount 	= 	$tax->amount;
+    		  			}
+    		  		$productdetails 	= [
+							'costperpc' 	= 	$perpcprice,
+							'quantity'		= 	$data->quantity,
+							'total'			= 	$perpcprice * $data->quantity,
+							'taxid'			= 	!empty($data->taxid)?($data->taxid):null,
+							'net_amount' 	=	$perpcprice + $taxamount;
+				  		]
     		  		}
-
-
     		  	}
-
+    		  	
+    		  	return response()->json(['status'=>200,'data'=>$orders]);
     	} catch (Exception $e) {
 			    		
     	}

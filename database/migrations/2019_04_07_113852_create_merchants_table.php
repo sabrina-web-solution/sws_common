@@ -14,8 +14,8 @@ class CreateMerchantsTable extends Migration
     public function up()
     {
         Schema::create('merchants', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('system_id')->unsigned();
+            $table->bigIncrements('id');
+            $table->bigInteger('system_id')->unsigned();
             $table->foreign('system_id')->references('id')->on('system_type');
             $table->string('merchant_name');
             $table->string('merchant_images')->nullable();

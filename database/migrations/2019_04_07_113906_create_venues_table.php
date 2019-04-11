@@ -14,10 +14,10 @@ class CreateVenuesTable extends Migration
     public function up()
     {
         Schema::create('venues', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('system_id')->unsigned();
+            $table->bigIncrements('id');
+            $table->bigInteger('system_id')->unsigned();
             $table->foreign('system_id')->references('id')->on('system_type');
-            $table->integer('merchant_id')->unsigned();
+            $table->bigInteger('merchant_id')->unsigned();
             $table->foreign('merchant_id')->references('id')->on('merchants');
             $table->string('venue_name');
             $table->string('venue_images');

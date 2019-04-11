@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Admin;
+namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Tax extends Model
 {
     //
 }

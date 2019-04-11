@@ -14,13 +14,13 @@ class CreatePaymentsTable extends Migration
     public function up()
     {
         Schema::create('payments', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('system_id')->unsigned();
+            $table->bigIncrements('id');
+            $table->bigInteger('system_id')->unsigned();
             $table->foreign('system_id')->references('id')->on('system_type');
             $table->string('payment_code')->unique();
-            $table->integer('order_id')->unsigned();
+            $table->bigInteger('order_id')->unsigned();
             $table->foreign('order_id')->references('id')->on('order_masters');
-            $table->integer('user_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamp('payment_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->decimal('paid',10,2)->default('0.0');

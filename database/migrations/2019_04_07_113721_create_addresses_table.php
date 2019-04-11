@@ -14,19 +14,19 @@ class CreateAddressesTable extends Migration
     public function up()
     {
         Schema::create('addresses', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('system_id')->unsigned();
+            $table->bigIncrements('id');
+            $table->bigInteger('system_id')->unsigned();
             $table->foreign('system_id')->references('id')->on('system_type');
-            $table->integer('user_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('flat')->nullable();
             $table->string('area')->nullable();
             $table->string('landmark')->nullable();
-            $table->integer('city_id')->unsigned();
+            $table->bigInteger('city_id')->unsigned();
             $table->foreign('city_id')->references('id')->on('cities');
-            $table->integer('state_id')->unsigned();
+            $table->bigInteger('state_id')->unsigned();
             $table->foreign('state_id')->references('id')->on('states');
-            $table->integer('country_id')->unsigned();
+            $table->bigInteger('country_id')->unsigned();
             $table->foreign('country_id')->references('id')->on('countries');
             $table->string('pincode')->nullable();
             $table->enum('address_type',['Home','Office','Other']);

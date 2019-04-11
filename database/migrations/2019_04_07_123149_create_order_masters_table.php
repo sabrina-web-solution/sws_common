@@ -14,11 +14,11 @@ class CreateOrderMastersTable extends Migration
     public function up()
     {
         Schema::create('order_masters', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('system_id')->unsigned();
+            $table->bigIncrements('id');
+            $table->bigInteger('system_id')->unsigned();
             $table->foreign('system_id')->references('id')->on('system_type');
             $table->string('order_code')->unique();
-            $table->integer('user_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamp('order_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->decimal('totalamount',10,2)->default('0.0');

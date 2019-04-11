@@ -14,8 +14,8 @@ class CreateProductBrandsTable extends Migration
     public function up()
     {
         Schema::create('product_brands', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('system_id')->unsigned();
+            $table->bigIncrements('id');
+            $table->bigInteger('system_id')->unsigned();
             $table->foreign('system_id')->references('id')->on('system_type');
             $table->string('brand_name');
             $table->string('brand_images');

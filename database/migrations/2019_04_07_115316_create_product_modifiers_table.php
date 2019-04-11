@@ -14,14 +14,14 @@ class CreateProductModifiersTable extends Migration
     public function up()
     {
         Schema::create('product_modifiers', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('system_id')->unsigned();
+            $table->bigIncrements('id');
+            $table->bigInteger('system_id')->unsigned();
             $table->foreign('system_id')->references('id')->on('system_type');
-            $table->integer('product_id')->unsigned();
+            $table->bigInteger('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products');
-            $table->integer('venue_id')->unsigned();
+            $table->bigInteger('venue_id')->unsigned();
             $table->foreign('venue_id')->references('id')->on('venues');
-            $table->integer('merchant_id')->unsigned();
+            $table->bigInteger('merchant_id')->unsigned();
             $table->foreign('merchant_id')->references('id')->on('merchants');
             $table->string('modifier_name');
             $table->string('modifier_images');

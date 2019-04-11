@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSystemTypeTable extends Migration
+class CreateStatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateSystemTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('system_type', function (Blueprint $table) {
+        Schema::create('states', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('system_name');
+            $table->string('state_name');
+            $table->bigInteger('country_id')->unsigned();
+            $table->foreign('country_id')->references('id')->on('countries');
             $table->integer('status')->default('1');
             $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
@@ -29,6 +31,6 @@ class CreateSystemTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('system_type');
+        Schema::dropIfExists('states');
     }
 }

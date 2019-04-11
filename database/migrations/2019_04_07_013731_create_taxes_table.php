@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSystemTypeTable extends Migration
+class CreateTaxesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateSystemTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('system_type', function (Blueprint $table) {
+        Schema::create('taxes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('system_name');
-            $table->integer('status')->default('1');
+            $table->string('tax_type');
+            $table->string('tax_name');
+            $table->decimal('amount',8,2);
             $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-        });
+       });
     }
 
     /**
@@ -29,6 +30,6 @@ class CreateSystemTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('system_type');
+        Schema::dropIfExists('taxes');
     }
 }
